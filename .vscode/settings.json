@@ -13,8 +13,8 @@
             },
             "server": "localhost",
             "driver": "PostgreSQL",
-            "name": "app9 railway",
-            "connectString": "postgresql://postgres:majLxoQOApvUhgrEILnhOgZaIZFFerxa@maglev.proxy.rlwy.net:54779/railway"
+            "name": "app1 railway",
+            "connectString": "postgresql://postgres:VfatnQLeZordcFoPKfyJaTljAbkocHgp@maglev.proxy.rlwy.net:36695/railway"
         }
     ]
 }
