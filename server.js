@@ -26,8 +26,8 @@ const PORT = process.env.PORT || 8080;
 // ===============================
 // Konstanten
 // ===============================
-const SPIELZEIT_MINUTEN = 3;
-const NACHSPIELZEIT_MINUTEN = 0;
+const SPIELZEIT_MINUTEN = 90;
+const NACHSPIELZEIT_MINUTEN = 40;
 
 // ===============================
 // Middleware
@@ -80,7 +80,13 @@ const isRailway =
 const pool = new pg.Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: isRailway ? { rejectUnauthorized: false } : false
+
 });
+pool.on("connect", async (client) => {
+  await client.query("SET TIME ZONE 'Europe/Berlin'");
+});
+
+
 
 pool.connect()
     .then(c => {
