@@ -1,3 +1,5 @@
-ALTER TABLE users
-ADD CONSTRAINT users_name_unique UNIQUE (name);
-
+CREATE TABLE saisons (
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    aktiv BOOLEAN DEFAULT true
+);
