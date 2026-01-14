@@ -482,7 +482,8 @@ app.get("/api/tips", requireLogin, async (req, res) => {
             JOIN users u ON u.id = t.user_id
             JOIN spiele s ON s.id = t.spiel_id
 
-            ORDER BY s.anstoss, u.name
+            ORDER BY s.anstoss DESC, u.name ASC
+            
         `);
 
         res.json(result.rows);
