@@ -14,16 +14,11 @@
     <button id="logoutBtn">Logout</button>
 </header>
 
-<nav>
-    <ul>
-        <li><a href="/">Login</a></li>
-        <li><strong>Admin Dashboard</strong></li>
-    </ul>
-</nav>
+
 
 <main>
-    <section>
-        <h2>Neue Zeit</h2>
+    <section id="spalte1"> 
+            <h2>Neue Zeit</h2>
         <input type="datetime-local" id="zeitInput">
         <button id="saveZeit">Speichern</button>
 
@@ -32,7 +27,7 @@
         <button id="deleteZeit">Löschen</button>
     </section>
 
-    <section>
+    <section id="spalte2">
         <h2>Vereine</h2>
         <input type="text" id="vereinInput" placeholder="Vereinsname">
         <button id="saveVerein">Speichern</button>
@@ -41,7 +36,7 @@
         <button id="deleteVerein">Löschen</button>
     </section>
 
-    <section>
+    <section id="spalte3">
         <h2>Spiele</h2>
 
         <select id="AuswahlzeitSelect"></select>
@@ -52,7 +47,7 @@
 
         <hr>
 
-    <section>
+   
     <h2>Spiele auswerten</h2>
 
     <select id="spieleSelect"></select>
@@ -63,11 +58,13 @@
     </div>
 
     <button id="saveErgebnis">Ergebnis speichern & auswerten</button>
-</section>
+
         
 
         <button id="deleteSpiel">Spiel löschen</button>
-  <section id="spalte3"      
+</section>
+
+<section id="spalte4"      
 <h2>Benutzerverwaltung</h2>
 <form id="userForm">
     <input type="text" id="userName" placeholder="Name" required>
@@ -82,7 +79,7 @@
     
     
 </form>
-</section>
+
 
 <table border="1">
     <thead>
@@ -95,4 +92,11 @@
     <tbody id="userTable"></tbody>
 </table>
     </section>
+
+<section id="spalte5">
+<h2>Reserve</h2>
+</section>
+
+
+
 </main>

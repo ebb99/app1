@@ -2,47 +2,33 @@ body {
   margin: 0;
   min-height: 100vh;
 
-  display: grid;
-  grid-template-columns: 0.5fr 0.7fr 3fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "header header header"
-    "nav    main   aside";
+ 
+
 }
 
 /* Grid-Zuordnung */
 header {
-  grid-area: header;
+
   background: white;
   color: black;
   border-style:  solid;
   padding: 1rem;
+  width:auto
 }
 
-nav {
-  grid-area: nav;
-  background: #ccc;
-    padding: 1rem;
-  }
+
 
 main {
   grid-area: main;
   display: grid;
-  grid-template-columns:0.4fr 1.0fr 1.0fr;
- 
+  grid-template-columns:0.4fr 1.0fr 1.0fr 1.0fr 1.0fr;
+  
   gap: 0.5rem;
   background: #eee;
     padding: 1rem;
 }
 
-aside {
-  grid-area: aside;
 
-  display: grid;
-  grid-template-columns:0.4fr 1.0fr 1.0fr;
- 
-  gap: 0.5rem;
-}
 button {
   background: blue;
   color: white;
@@ -65,13 +51,31 @@ select {
   border-color: red;
   text-align: center;
   padding: 0.5rem;
-}#spalte2 {
+}
+#spalte2 {
   background: white;
   border-style: solid;
   border-color: red;
   text-align: center;
   padding: 0.5rem;
-}#spalte3 {
+}
+#spalte3 {
+  background: white;
+  border-style: solid;
+  border-color: red;
+  text-align: center;
+  padding: 0.5rem;
+}
+#spalte4
+ {
+  background: white;
+  border-style: solid;
+  border-color: red;
+  text-align: center;
+  padding: 0.5rem;
+}
+#spalte5
+ {
   background: white;
   border-style: solid;
   border-color: red;
