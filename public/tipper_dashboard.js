@@ -243,65 +243,6 @@ async function name_ermitteln(requiredRole = null) {
 
 
 
-
-
-
-
-
-
-
-
-// ===============================
-// Spiele laden
-// ===============================
-
-/*
-
-async function ladeSpiele() {
-    const spiele = await api("/api/spiele");
-
-    $("spieleSelect").innerHTML = '<option value="">Spiel wählen …</option>';
-
-    spiele
-        .filter(s => s.statuswort === "geplant")
-        .forEach(s => {
-            const text = `${new Date(s.anstoss).toLocaleString("de-DE")}
-${s.heimverein} : ${s.gastverein}`;
-
-            $("spieleSelect").appendChild(new Option(text, s.id));
-        });
-}
-
-*/
-
-/*
-// ===============================
-// Tipp speichern
-// ===============================
-async function tippSpeichern() {
-    const spiel_id = $("spieleSelect").value;
-    const heimtipp = Number($("heimtipp").value);
-    const gasttipp = Number($("gasttipp").value);
-
-    if (!spiel_id) return alert("Spiel wählen");
-    if (isNaN(heimtipp) || isNaN(gasttipp)) return alert("Tipp fehlt");
-
-    await api("/api/tips", {
-        method: "POST",
-        body: JSON.stringify({ spiel_id, heimtipp, gasttipp })
-    });
-
-    $("meldung").innerText = "✅ Tipp gespeichert";
-
-    $("heimtipp").value = "";
-    $("gasttipp").value = "";
-
-    ladeTipps();
-    ladeRangliste();
-}
-*/
-
-
 // ===============================
 // Alle Tipps anzeigen
 // ===============================
