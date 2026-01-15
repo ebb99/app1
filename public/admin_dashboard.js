@@ -25,7 +25,7 @@ function $(id) {
 // INIT
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
-    ladeZeiten();
+    //ladeZeiten();
     ladeVereine();
     ladeSpiele();
     ladeUser();
@@ -79,7 +79,7 @@ async function ladeZeiten() {
         console.log("📦 Zeiten:", zeiten);
 
         const select1 = $("zeitenSelect");
-        const select2 = $("AuswahlzeitSelect");
+        
 
         if (!select1 || !select2) {
             console.error("❌ Zeiten-Select nicht gefunden", {
@@ -121,7 +121,7 @@ const text = `${new Date(z.zeit).toLocaleString("de-DE", {
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
     console.log("📄 DOM geladen");
-    ladeZeiten();
+    //ladeZeiten();
 });
 
 
@@ -136,7 +136,7 @@ async function zeitSpeichern() {
     });
 
     $("zeitInput").value = "";
-    ladeZeiten();
+    //ladeZeiten();
 }
 
 async function zeitLoeschen() {
@@ -144,7 +144,7 @@ async function zeitLoeschen() {
     if (!id) return;
 
     await api(`/api/zeiten/${id}`, { method: "DELETE" });
-    ladeZeiten();
+    //ladeZeiten();
 }
 
 // ===============================
@@ -203,22 +203,24 @@ async function ladeSpiele() {
     });
 }
 
-async function spielSpeichern() {
-    const zeitId = $("AuswahlzeitSelect").value;
+
+    
+ async function spielSpeichern() {
+    const zeitId = $("anstosszeitInput").value;
     const heimId = $("heimSelect").selectedOptions[0]?.text;
     const gastId = $("gastSelect").selectedOptions[0]?.text;
     console.log({ zeitId, heimId, gastId });
-    if (!zeitId || !heimId || !gastId) {
-        return alert("Bitte Zeit & Vereine wählen");
+    if ( !heimId || !gastId) {
+        return alert("Bitte  Vereine wählen");
     }
 
-    const zeiten = await api("/api/zeiten");
-    const zeit = zeiten.find(z => z.id == zeitId);
+    //const zeiten = await api("/api/zeiten");
+    //const zeit = zeiten.find(z => z.id == zeitId);
 
     await api("/api/spiele", {
         method: "POST",
         body: JSON.stringify({
-            anstoss: zeit.zeit,
+            anstoss: anstosszeitInput.value,
             heimverein: heimId,
             gastverein: gastId,
             heimtore: 0,
