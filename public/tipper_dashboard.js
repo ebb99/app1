@@ -276,15 +276,26 @@ async function ladeTipps() {
     const div = document.createElement("div");
     div.className = "spiel";
 
+    const statusClass =
+        gruppe.spiel.statuswort === "beendet" ? "status-beendet" : "status-offen";
+
     div.innerHTML = `
-      <strong>${gruppe.spiel.heimverein} – ${gruppe.spiel.gastverein}</strong>
-      <div class="status">
+    <strong>${gruppe.spiel.heimverein} – ${gruppe.spiel.gastverein}</strong>
+    <div class="status">
         ${new Date(gruppe.spiel.anstoss).toLocaleString("de-DE")}
-        | Status: ${gruppe.spiel.statuswort}
+        | Status: <span class="${statusClass}">
+            ${gruppe.spiel.statuswort}
+        </span>
         | Ergebnis: ${gruppe.spiel.heimtore ?? "-"} :
-          ${gruppe.spiel.gasttore ?? "-"}
-      </div>
-    `;
+        ${gruppe.spiel.gasttore ?? "-"}
+    </div>
+`;
+
+
+
+
+
+
 
     gruppe.tips.forEach(tipp => {
       const row = document.createElement("div");

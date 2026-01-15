@@ -119,3 +119,12 @@
         width:30px;
         height:auto;
         }
+
+        .status-beendet {
+        color: red;
+        font-weight: bold;
+        }
+
+        .status-offen {
+        color: black;
+        }
