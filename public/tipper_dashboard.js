@@ -122,7 +122,7 @@ async function ladeSpieleMitTipps() {
         const tr1 = document.createElement("tr");
          tr1.innerHTML = `
             <td colspan="3">
-                📅 ${new Date(s.anstoss).toLocaleString("de-DE")}
+                 ${new Date(s.anstoss).toLocaleString("de-DE")}
                 | Status: <b>${s.statuswort}</b>
             </td>
         `;
