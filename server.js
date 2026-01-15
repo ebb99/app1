@@ -23,6 +23,10 @@ const bcrypt = require("bcrypt");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+
+
+
+
 // ===============================
 // Konstanten
 // ===============================
@@ -561,6 +565,6 @@ app.delete("/api/users/:id", requireAdmin, async (req, res) => {
 // ===============================
 // Start
 // ===============================
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server läuft auf Port ${PORT}`);
 });
