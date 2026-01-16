@@ -1,3 +1,5 @@
+//const { text } = require("express");
+
 console.log("✅ tipper_dashboard.js geladen");
 
 // ===============================
@@ -120,9 +122,13 @@ async function ladeSpieleMitTipps() {
     geplant.forEach(s => {
         // Zeile 1: Datum + Status
         const tr1 = document.createElement("tr");
+
+        const textd ="ss"
+
+        console.log(textd);
          tr1.innerHTML = `
             <td colspan="3">
-                 ${new Date(s.anstoss).toLocaleString("de-DE")}
+                       ${new Date(s.anstoss).toLocaleString("de-DE")}
                 | Status: <b>${s.statuswort}</b>
             </td>
         `;
