@@ -119,16 +119,32 @@ async function ladeSpieleMitTipps() {
 
     //zeigeTestMeldung(`${geplant.length} Spiele geladen`, "green")
     
+const options = { 
+  weekday: 'long',   // "Samstag"
+  year: 'numeric',   // "2026"
+  month: '2-digit',  // "01"
+  day: '2-digit',    // "17"
+  hour: '2-digit',   // "18"
+  minute: '2-digit'  // "00"
+};
+
+
+
+
+
+
     geplant.forEach(s => {
         // Zeile 1: Datum + Status
         const tr1 = document.createElement("tr");
 
-        const textd ="ss"
+ const textd = new Date(s.anstoss).toLocaleString("de-DE", options) + " Uhr";
+console.log(textd); // Ausgabe z.B.: "Samstag, 17.01.2026, 18:00 Uhr"
+    
 
-        console.log(textd);
+  
          tr1.innerHTML = `
             <td colspan="3">
-                       ${new Date(s.anstoss).toLocaleString("de-DE")}
+                       ${textd}
                 | Status: <b>${s.statuswort}</b>
             </td>
         `;
