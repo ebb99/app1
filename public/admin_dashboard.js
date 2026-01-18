@@ -63,6 +63,7 @@ function $(id) {
 // Zeiten
 // ===============================
 
+/*
 async function ladeZeiten() {
     console.log("⏳ ladeZeiten()");
 
@@ -114,7 +115,7 @@ const text = `${new Date(z.zeit).toLocaleString("de-DE", {
         console.error("❌ ladeZeiten Fehler:", err);
     }
 }
-
+*/
 
 // ===============================
 // Start
@@ -124,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //ladeZeiten();
 });
 
-
+/*
 async function zeitSpeichern() {
     const v = $("zeitInput").value;
     if (!v) return alert("Zeit fehlt");
@@ -146,7 +147,7 @@ async function zeitLoeschen() {
     await api(`/api/zeiten/${id}`, { method: "DELETE" });
     //ladeZeiten();
 }
-
+*/
 // ===============================
 // Vereine
 // ===============================
