@@ -21,7 +21,7 @@ header {
 main {
   grid-area: main;
   display: grid;
-  grid-template-columns:0.4fr 1.0fr 1.0fr 1.0fr ;
+  grid-template-columns:0.4fr 2.0fr 1.0fr 1.0fr ;
   
   gap: 0.5rem;
   background: #eee;
