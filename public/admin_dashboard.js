@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ladeUser();
 
     $("logoutBtn")?.addEventListener("click", logout);
-    $("saveZeit")?.addEventListener("click", zeitSpeichern);
-    $("deleteZeit")?.addEventListener("click", zeitLoeschen);
+    //$("saveZeit")?.addEventListener("click", zeitSpeichern);
+    //$("deleteZeit")?.addEventListener("click", zeitLoeschen);
 
     $("saveVerein")?.addEventListener("click", vereinSpeichern);
     $("deleteVerein")?.addEventListener("click", vereinLoeschen);
