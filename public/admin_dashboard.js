@@ -116,7 +116,7 @@ const text = `${new Date(z.zeit).toLocaleString("de-DE", {
     }
 }
 */
-
+/*
 // ===============================
 // Start
 // ===============================
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("📄 DOM geladen");
     //ladeZeiten();
 });
-
+*/
 /*
 async function zeitSpeichern() {
     const v = $("zeitInput").value;
