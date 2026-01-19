@@ -70,7 +70,7 @@
             color: #666;
             margin-bottom: 8px;
         }
-
+/* alt
         .tipp {
             display: flex;
             justify-content: space-between;
@@ -82,6 +82,37 @@
         .tipp:last-child {
             border-bottom: none;
         }
+
+        */
+.tipp {
+  display: flex;
+  gap: 20px; /* Abstand zwischen den Spalten */
+  border-bottom: 1px solid #ccc; /* Optional: Trennlinie */
+  padding: 5px 0;
+}
+
+/* Alle Spalten standardmäßig links */
+.tipp span {
+  flex: 1;          /* Alle Spalten sind gleich breit */
+  text-align: left; 
+}
+
+/* Nur die 2. und 3. Spalte rechtsbündig */
+.tipp span:nth-child(2),
+.tipp span:nth-child(3) {
+  text-align: right;
+}
+
+.tipp span:nth-child(1) { flex: 2; } /* Name bekommt mehr Platz */
+.tipp span:nth-child(2) { flex: 1; } /* Tipp-Ergebnis */
+.tipp span:nth-child(3) { flex: 1; } /* Punkte */
+
+
+
+
+
+
+
 
         table {
             width: 100%;
