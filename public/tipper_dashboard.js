@@ -149,13 +149,14 @@ console.log(textd); // Ausgabe z.B.: "Samstag, 17.01.2026, 18:00 Uhr"
             </td>
         `;
 
-        // Zeile 2: Heimverein + Tipp
+      // Zeile 2: Heimverein + Tipp
         const tr2 = document.createElement("tr");
         const logoh = s.heimverein+"_logo.png"
         tr2.innerHTML = `
-            <td width="40%"><b><img src="/bilder/${logoh}" alt="logo"> ${s.heimverein}</b></td>
+            <td width="60%"><b><img src="/bilder/${logoh}" alt="logo"> ${s.heimverein}</b></td>
             <td width="20%">Heim</td>
-            <td width="40%">
+            <td width="20%">
+
                 <input type="number"
                        min="0"
                        data-spiel="${s.id}"
@@ -168,9 +169,10 @@ console.log(textd); // Ausgabe z.B.: "Samstag, 17.01.2026, 18:00 Uhr"
         const tr3 = document.createElement("tr");
         const logog = s.gastverein+"_logo.png"
         tr3.innerHTML = `
-            <td><b><img src="/bilder/${logog}" alt="logo">  ${s.gastverein}</b></td>
-            <td>Gast</td>
-            <td>
+            <td width="60%"><b><img src="/bilder/${logog}" alt="logo"> ${s.gastverein}</b></td>
+            <td width="20%">Gast</td>
+            <td width="20%">
+           
                 <input type="number"
                        min="0"
                        data-spiel="${s.id}"

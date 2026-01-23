@@ -107,7 +107,12 @@
 .tipp span:nth-child(2) { flex: 1; } /* Tipp-Ergebnis */
 .tipp span:nth-child(3) { flex: 1; } /* Punkte */
 
-
+.tippInput {
+  width: 50px;
+  text-align: center;
+  font-size: 18px;
+  padding: 4px;
+}
 
 
 
