@@ -16,16 +16,12 @@ const path = require("path");
 const cron = require("node-cron");
 const session = require("express-session");
 const bcrypt = require("bcrypt");
-
+const cors = require("cors");
 // ===============================
 // App
 // ===============================
 const app = express();
 const PORT = process.env.PORT || 8080;
-
-
-
-
 
 // ===============================
 // Konstanten
@@ -39,6 +35,12 @@ const NACHSPIELZEIT_MINUTEN = 30;
 app.use(express.json());
 app.use(express.static("public"));
 app.use("/bilder", express.static("bilder"));
+
+app.use(cors({
+    origin: 'http://localhost:8080', // Ersetze dies mit der URL deines Frontends
+    credentials: true, // <-- CRITICAL: Erlaubt das Senden/Empfangen von Cookies
+}));
+
 
 app.use(session({
     secret: process.env.SESSION_SECRET || "super-geheim",
