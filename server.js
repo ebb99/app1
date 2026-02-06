@@ -129,12 +129,6 @@ cron.schedule("* * * * *", async () => {
 });
 
 
-/*
-
-
-*/
-
-
 app.get("/api/rangliste", requireLogin, async (req, res) => {
     const result = await pool.query(`
     SELECT u.name, COALESCE(SUM(t.punkte),0) AS punkte
