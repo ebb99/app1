@@ -24,6 +24,23 @@ function $(id) {
     return document.getElementById(id);
 }
 
+function getStatusClass(statuswort) {
+    const mapping = {
+        geplant: "status-geplant",
+        live: "status-live",
+        beendet: "status-beendet",
+        ausgewertet: "status-ausgewertet"
+    };
+
+    return mapping[statuswort] || "";  // falls etwas Unerwartetes kommt
+}
+
+
+
+
+
+
+
 // ===============================
 // INIT
 // ===============================
@@ -302,12 +319,13 @@ async function ladeTipps() {
 
     const statusClass =
         gruppe.spiel.statuswort === "beendet" ? "status-beendet" : "status-offen";
-
+    const statuswort = gruppe.spiel.statuswort;
+    const cssClass = getStatusClass(statuswort);
     div.innerHTML = `
     <strong>${gruppe.spiel.heimverein} – ${gruppe.spiel.gastverein}</strong>
     <div class="status">
         ${new Date(gruppe.spiel.anstoss).toLocaleString("de-DE")}
-        | Status: <span class="${statusClass}">
+        | Status: <span class="${cssClass}">
             ${gruppe.spiel.statuswort}
         </span>
         | Ergebnis: ${gruppe.spiel.heimtore ?? "-"} :

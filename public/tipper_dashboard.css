@@ -155,12 +155,25 @@
         width:30px;
         height:auto;
         }
-
-        .status-beendet {
-        color: red;
-        font-weight: bold;
-        }
-
-        .status-offen {
+.status-offen {
         color: black;
         }
+.status-geplant {
+    color: green;
+    font-weight: bold;
+}
+
+.status-live {
+    color: red;
+    font-weight: bold;
+}
+
+.status-beendet {
+    color: blue;
+    font-weight: bold;
+}
+
+.status-ausgewertet {
+    color: black;
+    font-weight: bold;
+}
