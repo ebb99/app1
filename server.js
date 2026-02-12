@@ -344,18 +344,19 @@ app.patch("/api/spiele/:id/ergebnis", requireAdmin, async (req, res) => {
             WHERE spiel_id = $1
         `, [spielId]);
 
-        for (const t of tips.rows) {
+   for (const t of tips.rows) {
             let punkte = 0;
+            
 
             if (t.heimtipp === heimtore && t.gasttipp === gasttore) {
+                punkte = 5;
+            } else if (t.heimtipp - t.gasttipp === heimtore - gasttore) {
                 punkte = 3;
-            } else if (
-                (t.heimtipp - t.gasttipp) * (heimtore - gasttore) > 0
-                || (t.heimtipp === t.gasttipp && heimtore === gasttore)
+            }
+             else if ((t.heimtipp - t.gasttipp) * (heimtore - gasttore) > 0
             ) {
                 punkte = 1;
             }
-
             await pool.query(`
                 UPDATE tips
                 SET punkte = $1
