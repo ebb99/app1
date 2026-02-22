@@ -129,16 +129,16 @@ cron.schedule("* * * * *", async () => {
 });
 
 
-app.get("/api/rangliste", requireLogin, async (req, res) => {
-    const result = await pool.query(`
-    SELECT u.name, COALESCE(SUM(t.punkte),0) AS punkte
-    FROM users u
-    LEFT JOIN tips t ON u.id = t.user_id
-    GROUP BY u.id
-    ORDER BY punkte DESC
-    `);
-    res.json(result.rows);
-});
+// app.get("/api/rangliste", requireLogin, async (req, res) => {
+//     const result = await pool.query(`
+//     SELECT u.name, COALESCE(SUM(t.punkte),0) AS punkte
+//     FROM users u
+//     LEFT JOIN tips t ON u.id = t.user_id
+//     GROUP BY u.id
+//     ORDER BY punkte DESC
+//     `);
+//     res.json(result.rows);
+// });
 
 
 
@@ -226,6 +226,65 @@ app.delete("/api/zeiten/:id", requireAdmin, async (req, res) => {
         res.status(500).json({ error: "Zeit löschen fehlgeschlagen" });
     }
 });
+
+
+
+
+// BEENDTE SPIELE (statuswort = 'beendet')
+app.get("/api/spiele/beendet", async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT
+                id,
+                anstoss,
+                TO_CHAR(anstoss, 'DD.MM.YYYY HH24:MI') AS spielbeginn_formatiert,
+                heimverein AS heimverein,
+                gastverein AS gastverein,
+                heimtore,
+                gasttore,
+                heimbild,
+                gastbild
+            FROM spiele
+            WHERE statuswort = 'beendet'
+            ORDER BY anstoss ASC
+        `);
+
+        res.json(result.rows);
+            // alert("Beendete Spiele geladen: " + result.rows.length);
+    } catch (err) {
+        console.error("Fehler beim Laden der beendeten Spiele:", err);
+        res.status(500).json({ error: "Fehler beim Laden der Daten" });
+    }
+});
+
+
+app.post("/api/spiele/beendet/update", requireAdmin, async (req, res) => {
+    try {
+        const updates = req.body;
+
+        for (const u of updates) {
+            await pool.query(
+                `UPDATE spiele
+                 SET heimtore = $1,
+                     gasttore = $2,
+                     statuswort = 'ausgewertet'
+                 WHERE id = $3`,
+                [u.tore_home, u.tore_gast, u.id]
+            );
+        }
+
+        res.json({
+            success: true,
+            message: "Alle Ergebnisse gespeichert und Spiele ausgewertet."
+        });
+
+    } catch (err) {
+        console.error("Fehler beim Speichern der Ergebnisse:", err);
+        res.status(500).json({ error: "Fehler beim Auswerten" });
+    }
+});
+
+
 
 // ===============================
 // Vereine API
@@ -505,7 +564,7 @@ app.get("/api/rangliste", requireLogin, async (req, res) => {
                 u.id,
                 u.name,
                 COALESCE(SUM(t.punkte), 0) AS punkte
-            FROM users u
+            FROM users u    
             LEFT JOIN tips t ON t.user_id = u.id
             GROUP BY u.id
             ORDER BY punkte DESC, u.name
