@@ -53,8 +53,8 @@ spiele.forEach(s => {
         <tr>
             <td>${s.id}</td>
             <td>${s.spielbeginn_formatiert}</td>
-            <td>${s.heim_name}</td>
-            <td>${s.gast_name}</td>
+            <td>${s.heimverein}</td>
+            <td>${s.gastverein}</td>
             <td><input id="home_${s.id}" type="number" min="0" value="${s.heimtore ?? ""}"></td>
             <td><input id="gast_${s.id}" type="number" min="0" value="${s.gasttore ?? ""}"></td>
         </tr>
