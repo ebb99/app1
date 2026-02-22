@@ -238,8 +238,8 @@ app.get("/api/spiele/beendet", async (req, res) => {
                 id,
                 anstoss,
                 TO_CHAR(anstoss, 'DD.MM.YYYY HH24:MI') AS spielbeginn_formatiert,
-                heimverein AS heimverein,
-                gastverein AS gastverein,
+                heimverein AS heim_name,
+                gastverein AS gast_name,
                 heimtore,
                 gasttore,
                 heimbild,
@@ -250,7 +250,7 @@ app.get("/api/spiele/beendet", async (req, res) => {
         `);
 
         res.json(result.rows);
-            // alert("Beendete Spiele geladen: " + result.rows.length);
+
     } catch (err) {
         console.error("Fehler beim Laden der beendeten Spiele:", err);
         res.status(500).json({ error: "Fehler beim Laden der Daten" });
@@ -258,10 +258,10 @@ app.get("/api/spiele/beendet", async (req, res) => {
 });
 
 
-app.post("/api/spiele/beendet/update", requireAdmin, async (req, res) => {
-    try {
-        const updates = req.body;
+app.post("/api/spiele/beendet/update", async (req, res) => {
+    const updates = req.body;
 
+    try {
         for (const u of updates) {
             await pool.query(
                 `UPDATE spiele
@@ -269,18 +269,15 @@ app.post("/api/spiele/beendet/update", requireAdmin, async (req, res) => {
                      gasttore = $2,
                      statuswort = 'ausgewertet'
                  WHERE id = $3`,
-                [u.tore_home, u.tore_gast, u.id]
+                 [u.heimtore, u.gasttore, u.id]
             );
         }
 
-        res.json({
-            success: true,
-            message: "Alle Ergebnisse gespeichert und Spiele ausgewertet."
-        });
+        res.json({ message: "Ergebnisse gespeichert und ausgewertet!" });
 
     } catch (err) {
         console.error("Fehler beim Speichern der Ergebnisse:", err);
-        res.status(500).json({ error: "Fehler beim Auswerten" });
+        res.status(500).json({ error: "Fehler beim Speichern" });
     }
 });
 
