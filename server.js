@@ -129,19 +129,6 @@ cron.schedule("* * * * *", async () => {
 });
 
 
-// app.get("/api/rangliste", requireLogin, async (req, res) => {
-//     const result = await pool.query(`
-//     SELECT u.name, COALESCE(SUM(t.punkte),0) AS punkte
-//     FROM users u
-//     LEFT JOIN tips t ON u.id = t.user_id
-//     GROUP BY u.id
-//     ORDER BY punkte DESC
-//     `);
-//     res.json(result.rows);
-// });
-
-
-
 // ===============================
 // Session / Auth API
 // ===============================
@@ -557,14 +544,15 @@ app.get("/api/tips", requireLogin, async (req, res) => {
 app.get("/api/rangliste", requireLogin, async (req, res) => {
     try {
         const result = await pool.query(`
-            SELECT
-                u.id,
-                u.name,
-                COALESCE(SUM(t.punkte), 0) AS punkte
-            FROM users u    
-            LEFT JOIN tips t ON t.user_id = u.id
-            GROUP BY u.id
-            ORDER BY punkte DESC, u.name
+               SELECT
+    u.id,
+    u.name,
+    COALESCE(SUM(t.punkte), 0) AS punkte,
+    COUNT(t.id) AS tipps_anzahl
+    FROM users u
+    LEFT JOIN tips t ON t.user_id = u.id
+    GROUP BY u.id, u.name
+    ORDER BY punkte DESC, u.name
         `);
 
         res.json(result.rows);
