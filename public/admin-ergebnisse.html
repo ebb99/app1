@@ -35,9 +35,6 @@
 
 <div id="msg" style="margin-top:20px; font-weight:bold;"></div>
 
-
-
-
 <script>
 let spiele = [];
 
@@ -56,8 +53,8 @@ async function loadErgebnisse() {
             <tr>
                 <td>${s.id}</td>
                 <td>${s.spielbeginn_formatiert}</td>
-                <td>${s.heimverein}</td>
-                <td>${s.gastverein}</td>
+                <td>${s.heim_name}</td>
+                <td>${s.gast_name}</td>
                 <td><input id="home_${s.id}" type="number" min="0" value="${s.heimtore ?? ""}"></td>
                 <td><input id="gast_${s.id}" type="number" min="0" value="${s.gasttore ?? ""}"></td>
             </tr>
@@ -65,12 +62,14 @@ async function loadErgebnisse() {
     });
 }
 
-
+// -------------------------------------------------------------
+// ALLE SPEICHERN
+// -------------------------------------------------------------
 async function saveAll() {
     const updates = spiele.map(s => ({
         id: s.id,
-        heimtore: Number(document.getElementById("home_" + s.id).value),
-        gasttore: Number(document.getElementById("gast_" + s.id).value)
+        tore_home: Number(document.getElementById("home_" + s.id).value),
+        tore_gast: Number(document.getElementById("gast_" + s.id).value)
     }));
 
     const msg = document.getElementById("msg");
@@ -101,11 +100,12 @@ async function saveAll() {
     }
 }
 
+// -------------------------------------------------------------
+// BEIM LADEN DER SEITE STARTEN
+// -------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
-    loadErgebnisse();   // ⬅️ Hier MUSS die Funktion ausgeführt werden
+    loadErgebnisse();
 });
-
-
 </script>
 
 </body>
