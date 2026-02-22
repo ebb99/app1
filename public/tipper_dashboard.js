@@ -368,7 +368,7 @@ async function ladeRangliste() {
         tr.innerHTML = `
             <td>${i + 1}</td>
             <td>${u.name}</td>
-            <td>${u.punkte}</td>
+            <td>${u.punkte} / ${u.tipps_anzahl}</td>
         `;
         tbody.appendChild(tr);
     });
