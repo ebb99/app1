@@ -406,7 +406,7 @@ app.patch("/api/spiele/:id/ergebnis", requireAdmin, async (req, res) => {
                 WHERE id = $2
             `, [punkte, t.id]);
         }
-
+console.log("Punkte:", punkte);
         res.json({
             success: true,
             spiel: spielRes.rows[0],
