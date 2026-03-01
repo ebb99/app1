@@ -250,17 +250,59 @@ app.post("/api/spiele/beendet/update", async (req, res) => {
 
     try {
         for (const u of updates) {
-            await pool.query(
+
+            // 1️⃣ Spiel aktualisieren
+            const spielRes = await pool.query(
                 `UPDATE spiele
                  SET heimtore = $1,
                      gasttore = $2,
                      statuswort = 'ausgewertet'
-                 WHERE id = $3`,
+                 WHERE id = $3
+                 RETURNING *`,
                  [u.heimtore, u.gasttore, u.id]
             );
+
+            if (!spielRes.rows.length) continue;
+
+            const heimtore = u.heimtore;
+            const gasttore = u.gasttore;
+
+            // 2️⃣ Alle Tipps zu diesem Spiel laden
+            const tipsRes = await pool.query(`
+                SELECT id, heimtipp, gasttipp
+                FROM tips
+                WHERE spiel_id = $1
+            `, [u.id]);
+
+            // 3️⃣ Punkte berechnen
+            for (const t of tipsRes.rows) {
+                let punkte = 0;
+
+                // Exakte Treffer
+                if (t.heimtipp === heimtore && t.gasttipp === gasttore) {
+                    punkte = 5;
+                }
+                // Tendenz + Tordifferenz
+                else if (t.heimtipp - t.gasttipp === heimtore - gasttore) {
+                    punkte = 3;
+                }
+                // Nur richtige Tendenz
+                else if ((t.heimtipp - t.gasttipp) * (heimtore - gasttore) > 0) {
+                    punkte = 1;
+                }
+
+                // 4️⃣ Punkte speichern
+                await pool.query(`
+                    UPDATE tips
+                    SET punkte = $1
+                    WHERE id = $2
+                `, [punkte, t.id]);
+            }
         }
 
-        res.json({ message: "Ergebnisse gespeichert und ausgewertet!" });
+        res.json({
+            message: "Alle Spielergebnisse gespeichert und Tipps ausgewertet!"
+        });
 
     } catch (err) {
         console.error("Fehler beim Speichern der Ergebnisse:", err);
