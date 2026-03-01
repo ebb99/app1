@@ -174,48 +174,6 @@ app.get("/api/session", (req, res) => {
 });
 
 
-// ===============================
-// Zeiten API
-// ===============================
-app.get("/api/zeiten", requireLogin, async (req, res) => {
-    try {
-        const result = await pool.query(
-            "SELECT id, zeit FROM zeiten ORDER BY zeit"
-        );
-        res.json(result.rows);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Zeiten laden fehlgeschlagen" });
-    }
-});
-
-app.post("/api/zeiten", requireAdmin, async (req, res) => {
-    const { zeit } = req.body;
-
-    try {
-        const result = await pool.query(
-            "INSERT INTO zeiten (zeit) VALUES ($1) RETURNING *",
-            [zeit]
-        );
-        res.json(result.rows[0]);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Zeit speichern fehlgeschlagen" });
-    }
-});
-
-app.delete("/api/zeiten/:id", requireAdmin, async (req, res) => {
-    try {
-        await pool.query("DELETE FROM zeiten WHERE id=$1", [req.params.id]);
-        res.json({ success: true });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Zeit löschen fehlgeschlagen" });
-    }
-});
-
-
-
 
 // BEENDTE SPIELE (statuswort = 'beendet')
 app.get("/api/spiele/beendet", async (req, res) => {
