@@ -310,7 +310,7 @@ app.delete("/api/vereine/:id", requireAdmin, async (req, res) => {
     }
 });
 
-
+// bis hierher synchronisiert mit app11
 
 // ===============================
 // Spiele + eigene Tipps neu
