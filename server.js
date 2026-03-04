@@ -345,13 +345,11 @@ app.get("/api/spiele", requireLogin, async (req, res) => {
 
 
 app.post("/api/spiele", requireAdmin, async (req, res) => {
-    // const { anstoss, heimverein, gastverein, heimtore, gasttore, statuswort } = req.body;
+ 
     const {
         anstoss,
         heimverein,
         gastverein,
-        // heimbild,
-        // gastbild,
         heimtore,
         gasttore,
         statuswort
@@ -362,13 +360,24 @@ app.post("/api/spiele", requireAdmin, async (req, res) => {
             `INSERT INTO spiele
              (anstoss, heimverein, gastverein, heimtore, gasttore, statuswort)
              VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`,
-            [anstoss, heimverein, gastverein, heimtore, gasttore, statuswort]
+            [
+                anstoss,
+                heimverein,
+                gastverein,
+                heimtore,
+                gasttore,
+                statuswort
+            ]
+         
+             // [anstoss, heimverein, gastverein, heimtore, gasttore, statuswort]
         );
         res.json(result.rows[0]);
     } catch {
         res.status(500).json({ error: "Spiel anlegen fehlgeschlagen" });
     }
 });
+
+// synchronisiert bis hierher mit app11
 
 app.patch("/api/spiele/:id/ergebnis", requireAdmin, async (req, res) => {
     const spielId = req.params.id;
