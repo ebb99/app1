@@ -345,8 +345,18 @@ app.get("/api/spiele", requireLogin, async (req, res) => {
 
 
 app.post("/api/spiele", requireAdmin, async (req, res) => {
-    const { anstoss, heimverein, gastverein, heimtore, gasttore, statuswort } = req.body;
-
+    // const { anstoss, heimverein, gastverein, heimtore, gasttore, statuswort } = req.body;
+    const {
+        anstoss,
+        heimverein,
+        gastverein,
+        heimbild,
+        gastbild,
+        heimtore,
+        gasttore,
+        statuswort
+    } = req.body;
+    
     try {
         const result = await pool.query(
             `INSERT INTO spiele
