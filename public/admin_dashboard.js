@@ -25,22 +25,17 @@ function $(id) {
 // INIT
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
-    //ladeZeiten();
+    
     ladeVereine();
     ladeSpiele();
     ladeUser();
 
     $("logoutBtn")?.addEventListener("click", logout);
-    //$("saveZeit")?.addEventListener("click", zeitSpeichern);
-    //$("deleteZeit")?.addEventListener("click", zeitLoeschen);
-
     $("saveVerein")?.addEventListener("click", vereinSpeichern);
     $("deleteVerein")?.addEventListener("click", vereinLoeschen);
-
     $("saveSpiel")?.addEventListener("click", spielSpeichern);
     $("deleteSpiel")?.addEventListener("click", spielLoeschen);
     $("saveErgebnis")?.addEventListener("click", ergebnisSpeichernUndAuswerten);
-    
     $("userForm")?.addEventListener("submit", userAnlegen);
 });
 
@@ -52,102 +47,12 @@ async function logout() {
     location.href = "/";
 }
 
-// ===============================
-// Zeiten
-// ===============================
 function $(id) {
     return document.getElementById(id);
 }
 
-// ===============================
-// Zeiten
-// ===============================
+// synchronisiert mit app11
 
-/*
-async function ladeZeiten() {
-    console.log("⏳ ladeZeiten()");
-
-    try {
-        const res = await fetch("/api/zeiten", {
-            credentials: "include"
-        });
-
-        if (!res.ok) {
-            throw new Error("HTTP " + res.status);
-        }
-
-        const zeiten = await res.json();
-        console.log("📦 Zeiten:", zeiten);
-
-        const select1 = $("zeitenSelect");
-        
-
-        if (!select1 || !select2) {
-            console.error("❌ Zeiten-Select nicht gefunden", {
-                zeitenSelect: !!select1,
-                AuswahlzeitSelect: !!select2
-            });
-            return;
-        }
-
-        select1.innerHTML = "";
-        select2.innerHTML = "";
-
-        zeiten.forEach(z => {
-            //const text = new Date(z.zeit).toLocaleString("de-DE");
-           // const text = new Date(z.zeit);
-
-const text = `${new Date(z.zeit).toLocaleString("de-DE", {
-    dateStyle: "short",
-    timeStyle: "short"
-})}`;
-
-
-
-
-            select1.appendChild(new Option(text, z.id));
-            select2.appendChild(new Option(text, z.id));
-        });
-
-        console.log("✅ Zeiten angezeigt");
-
-    } catch (err) {
-        console.error("❌ ladeZeiten Fehler:", err);
-    }
-}
-*/
-/*
-// ===============================
-// Start
-// ===============================
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("📄 DOM geladen");
-    //ladeZeiten();
-});
-*/
-/*
-async function zeitSpeichern() {
-    const v = $("zeitInput").value;
-    if (!v) return alert("Zeit fehlt");
-
-    await api("/api/zeiten", {
-        method: "POST",
-        body: JSON.stringify({ zeit: v })
-        
-    });
-
-    $("zeitInput").value = "";
-    //ladeZeiten();
-}
-
-async function zeitLoeschen() {
-    const id = $("zeitenSelect").value;
-    if (!id) return;
-
-    await api(`/api/zeiten/${id}`, { method: "DELETE" });
-    //ladeZeiten();
-}
-*/
 // ===============================
 // Vereine
 // ===============================
