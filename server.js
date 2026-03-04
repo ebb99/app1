@@ -350,13 +350,13 @@ app.post("/api/spiele", requireAdmin, async (req, res) => {
         anstoss,
         heimverein,
         gastverein,
-        heimbild,
-        gastbild,
+        // heimbild,
+        // gastbild,
         heimtore,
         gasttore,
         statuswort
     } = req.body;
-    
+
     try {
         const result = await pool.query(
             `INSERT INTO spiele
