@@ -472,9 +472,9 @@ app.delete("/api/spiele/:id", requireAdmin, async (req, res) => {
 
 app.post("/api/tips", requireLogin, requireTipper, async (req, res) => {
     const { spiel_id, heimtipp, gasttipp } = req.body;
-
+// console.log("Tipp-Request:", req.body); // ← WICHTIG
     try {
-        // Spiel laden
+       
         const spielRes = await pool.query(
             "SELECT anstoss, statuswort FROM spiele WHERE id=$1",
             [spiel_id]
